@@ -56,6 +56,32 @@
   				<option value="18">18 chars</option>
 			</select>
   		</div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="symbols" name="options" checked="checked"> Include Symbols
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="numbers" name="options" checked="checked"> Include Numbers
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="lowercase" name="options" checked="checked"> Include Lowercase Characters
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="uppercase" name="options" checked="checked"> Include Uppercase Characters
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="exclude_similar" name="options" checked="checked"> Exclude Similar Characters
+            </label>
+        </div>
+        <div class="alert alert-danger" style="display:none" role="alert" id="missing-option">Add at least one set of characters</div>
 </div>
   			<button type="button" class="btn btn-primary btn-lg " id="get-psw">Generate</button>
 		  </form>
@@ -84,10 +110,27 @@
 			
 			var size = $("#size").val();
 			size = parseInt(size);
-			var psw = generate(size);
+            
+            var options = [];
+            $.each($("input[name='options']:checked"), function(){
+                options.push($(this).val());
+            });
+            
+            if(options.length === 0 || (options.length === 1 && options.includes("exclude_similar"))) {
+                $("#missing-option").show();
+                return;
+            }
+            
+			var psw = generate(size, options);
 			  
 			$("#psw-container").html(psw);    
 		});
+        
+        $("input[name='options']").on('click', function(e){
+            if( $(this).is(':checked') ) {
+                $("#missing-option").hide();
+            }
+        });
 		
     });
     </script>

@@ -1,27 +1,53 @@
 
 
-function generate(size) {
+function generate(size, options) 
+{
+  var stringLowerCaseAll = "abcdefghijklmnopqrstuvwxyz";
+  var stringUpperCaseAll = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var stringLowerCase = "abcdefghijmnpqrstuvxz";
+  var stringUpperCase = "ABCDEFGHJLMNPQRSTUVXZ";
+  var numeric = '0123456789';
+  var symbols = "!?@#$%&_,.:;(){}[]*+-=|/"
+  var array = new Uint8Array(size);
+  window.crypto.getRandomValues(array);
 
-	var stringLowerCase = "abcdefghijmnpqrstuvxz";
-	var stringUpperCase = "ABCDEFGHJLMNPQRSTUVXZ";
-	var numeric = '0123456789';
-	var punctuation = '!@#$%&*()_+|}{[]:;?,./-=';
+  var c = [];
+  if(options.includes("symbols")){
+    c.push(symbols);
+  }
+	
+  if(options.includes("numbers")){
+    c.push(numeric);
+  }
+	
+  if(options.includes("exclude_similar")) {
+    if(options.includes("lowercase")){
+      c.push(stringLowerCase);
+    }
+	  
+    if(options.includes("uppercase")){
+      c.push(stringUpperCase);
+    }
+  } else {
+    if(options.includes("lowercase")){
+      c.push(stringLowerCaseAll);
+    }
+	  
+    if(options.includes("uppercase")){
+      c.push(stringUpperCaseAll);
+    }
+  }
 
-	var array = new Uint8Array(size);
-	window.crypto.getRandomValues(array);
-
-	var c = [stringLowerCase, stringUpperCase, numeric, punctuation];
-
-	c = shuffle(c);
-	var str = c.join('');
-	var psw = '';
-	for (var i = 0; i < array.length; i++) { 
-		x = (array[i] * (str.length-1)) / 255;
-		idx = Math.floor(x)
-		psw += str[idx];
-	}
-
-	return psw;
+  c = shuffle(c);
+  var str = c.join('');
+  var psw = '';
+  for (var i = 0; i < array.length; i++) { 
+    x = (array[i] * (str.length-1)) / 255;
+    idx = Math.floor(x)
+    psw += str[idx];
+  }
+  
+  return psw;
 }
 
 
