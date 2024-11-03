@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Secure and random password generator to protect your online accounts. Easily create strong, customizable passwords for enhanced security and convenience. Try our free password generator!">
     <link rel="icon" href="favicon.ico">
     <title>Javascript Password Generator</title>
     <!-- Bootstrap core CSS -->
@@ -17,29 +16,24 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Javascript Password Generator</a>
+          <span class="navbar-brand">Javascript Password Generator</span>
         </div>
       </div>
     </nav>
-
     <div class="container">
-      <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-6">
           <h2>Password</h2>
-          
-          <p class="lead" id="psw-container">[No Password - Click Generate to get one]</p>
+          <p class="lead" id="psw-container" aria-live="assertive">[No Password - Click Generate to get one]</p>
         </div>
         <!-- -------------------------------- -->
         <div class="col-md-6">
           <h2>Configuration</h2>
           <form>
-          
-          
           <div>
 
   		<div class="form-group">
-    		<label for="size">Size</label>
+    		<label for="size">Password size</label>
     		<select class="form-control" id="size" name="size">
   				<option value="6">6 chars</option>
   				<option value="7">7 chars</option>
@@ -83,25 +77,19 @@
         </div>
         <div class="alert alert-danger" style="display:none" role="alert" id="missing-option">Add at least one set of characters</div>
 </div>
-  			<button type="button" class="btn btn-primary btn-lg " id="get-psw">Generate</button>
+  			<button type="button" class="btn btn-primary btn-lg" id="get-psw">Generate Password</button>
 		  </form>
        </div>
-       <!-- ------------------------------------ -->
-        
       </div>
-
       <hr>
-
       <footer>
         <p></p>
       </footer>
     </div> <!-- /container -->
-
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="resources/assets/js/vendor/jquery.min.js"></script>
+    <script src="resources/js/jquery.min.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/main.js"></script>
     <script type="text/javascript">
@@ -136,7 +124,3 @@
     </script>
   </body>
 </html>
-
-
-
-
