@@ -25,6 +25,8 @@
         <div class="col-md-6">
           <h2>Password</h2>
           <p class="lead" id="psw-container" aria-live="assertive">[No Password - Click Generate to get one]</p>
+          <button type="button" class="btn btn-success" id="copy-btn" style="display:none">Copy to Clipboard</button>
+          <span id="copy-feedback" style="display:none; color: green; margin-left: 10px;">Copied!</span>
         </div>
         <!-- -------------------------------- -->
         <div class="col-md-6">
@@ -111,7 +113,22 @@
             
 			var psw = generate(size, options);
 			  
-			$("#psw-container").html(psw);    
+			$("#psw-container").html(psw);
+			$("#copy-btn").show();
+			$("#copy-feedback").hide();
+		});
+        
+        $("#copy-btn").on('click', function(){
+			var password = $("#psw-container").text();
+			
+			navigator.clipboard.writeText(password).then(function() {
+				$("#copy-feedback").show();
+				setTimeout(function(){
+					$("#copy-feedback").fadeOut();
+				}, 2000);
+			}).catch(function(err) {
+				alert('Failed to copy password: ' + err);
+			});
 		});
         
         $("input[name='options']").on('click', function(e){
